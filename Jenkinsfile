@@ -1,8 +1,8 @@
 pipeline {
 	agent none  
 	stages {
-		stage('BUILD') {
-      agent { label 'agent1'}
+		stage('BUILD') { 
+      agent { label 'master' }
 			steps {
 				sh '''
 					pwd
@@ -13,7 +13,7 @@ pipeline {
 		}
 		
 		stage('TEST') { 
-      agent { label 'agent2'}    
+      agent { label 'agent1' }     
 			steps {
 				sh '''
 					pwd
@@ -23,8 +23,8 @@ pipeline {
 			}	
 		}
 		
-		stage('DEPLOY') {
-       agent { label 'master'}
+		stage('DEPLOY') { 
+      agent { label 'agent2' }
 			steps {
 				sh '''
 					pwd
@@ -32,3 +32,6 @@ pipeline {
 					echo This is the third stage: DEPLOY
 				'''
 			}	
+		}
+	}
+}
